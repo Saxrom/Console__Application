@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Console_Application_Courses.Enum;
 using Console_Application_Courses.Interfaces;
+using Console_Application_Courses.Models;
 
 namespace Console_Application_Courses.Managment
 {
@@ -11,44 +11,157 @@ namespace Console_Application_Courses.Managment
         List<Group> _groups = new List<Group>();
         public List<Group> Groups => _groups;
 
-        public void CreatGroup(string no,byte limit,Categories category)
+        public string CreateGroup(Categories category,bool isOnline)
         {
-            if (limit<=0)
+            Group group = new Group(true, category);
+
+            foreach (Group existedGroup in Groups)
             {
-                Console.WriteLine("Please enter valid limit");
+                if (group.No.ToLower().Trim()!=existedGroup.No.ToLower().Trim())
+                {
+                    _groups.Add(group);
+                    return $"{group.No} successfully created";
+                }
+                
             }
-            Group group = new Group(no, limit,category);
-            
+            return$"Group can not create";
         }
 
-        public void CreatStudent()
+        public void CreateStudent(Student student,string groupNo)
         {
-            throw new NotImplementedException();
+            if (groupNo == null)
+            {
+                Console.WriteLine("Please enter valid group");
+            }
+
+            if (Groups.Count>0)
+            {
+                Group group = FindGroup(groupNo);
+
+                foreach (Group existedGroup in Groups)
+                {
+                    if (group.Students.Count < group.Limit)
+                    {
+                        group.Students.Add(student);
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("Group's limit is fulled");
+                    }
+                }
+            }
         }
 
-        public void DeleateStudent()
+        public void DeleateStudent(Student student,string groupNo)
         {
-            throw new NotImplementedException();
+            Group group = FindGroup(groupNo);
+
+            if (groupNo == null)
+            {
+                Console.WriteLine("Please enter valid group");
+            }
+
+            if (Groups.Count==0)
+            {
+                _groups.Add(group);
+                Console.WriteLine($"{group.No} seccessfully created");
+            }
+
+            foreach (Group existedGroup in Groups)
+            {
+                if (group.Students.Count < group.Limit)
+                {
+                    group.Students.Remove(student);
+                }
+
+                else
+                {
+                    Console.WriteLine("Group's limit is fulled");
+                }
+            }
+            Console.WriteLine("Group can not created");
+        }
+        
+        public Group FindGroup(string no)
+        {
+            Group group = new Group();
+
+            foreach (Group existedGroup in Groups)
+            {
+                if (group.No.ToLower().Trim() != existedGroup.No.ToLower().Trim())
+                {
+                    return group;
+                    
+                }
+            }
+            return group;
         }
 
-        public void MakeAmendOverGroup()
+
+        public void EditGroup(string oldGroup,string newGroup)
         {
-            throw new NotImplementedException();
+            if (FindGroup(newGroup)==null)
+            {
+                Group group = FindGroup(oldGroup);
+
+                if (group!=null)
+                {
+                    group.No = oldGroup.ToUpper().Trim();
+                }
+
+                else
+                {
+                    Console.WriteLine("There is no group with the name you are looking for"); 
+                }
+            }
+            else
+            {
+                Console.WriteLine("Such a group already exists");
+            }
         }
 
-        public void ShowAllStudents()
+        public void ShowAllOfStudents()
         {
-            throw new NotImplementedException();
+            Group group = new Group();
+            if (group.Students.Count>0)
+            {
+                foreach (Student student in group.Students)
+                {
+                    Console.WriteLine(student);
+                }  
+            }
+            else
+            {
+                Console.WriteLine("There is no such student");
+            }
+
         }
 
-        public void ShowAllStudentsByGroup()
+        public void ShowAllStudentsInGroup(string no)
         {
-            throw new NotImplementedException();
+            Group group = FindGroup(no);
+
+            if (group!=null)
+            {
+                Console.WriteLine($"There is no such grouo:{no.ToUpper()}");
+            }
         }
 
-        public void ShowListOFGroups()
+        public void ShowListOfGroups(string no)
         {
-            throw new NotImplementedException();
+            if (no!=null)
+            {
+                foreach (Group group in Groups)
+                {
+                    Console.WriteLine(group);
+                }
+            }
+
+            else
+            {
+                Console.WriteLine("Please enter valid group");
+            }
         }
     }
 }

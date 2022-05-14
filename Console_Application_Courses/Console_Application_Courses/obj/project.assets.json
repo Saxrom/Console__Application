@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/shahrom/Desktop/Console_Application_Courses/Console_Application_Courses/Console_Application_Courses.csproj",
+      "projectUniqueName": "/Users/shahrom/Desktop/ConsoleApplication/Console_Application_Courses/Console_Application_Courses/Console_Application_Courses.csproj",
       "projectName": "Console_Application_Courses",
-      "projectPath": "/Users/shahrom/Desktop/Console_Application_Courses/Console_Application_Courses/Console_Application_Courses.csproj",
+      "projectPath": "/Users/shahrom/Desktop/ConsoleApplication/Console_Application_Courses/Console_Application_Courses/Console_Application_Courses.csproj",
       "packagesPath": "/Users/shahrom/.nuget/packages/",
-      "outputPath": "/Users/shahrom/Desktop/Console_Application_Courses/Console_Application_Courses/obj/",
+      "outputPath": "/Users/shahrom/Desktop/ConsoleApplication/Console_Application_Courses/Console_Application_Courses/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/shahrom/.config/NuGet/NuGet.Config"

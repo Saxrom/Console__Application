@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using Console_Application_Courses.Enum;
 
 namespace Console_Application_Courses.Models
 {
-    class Group 
+    class Group
     {
         public string No;
         public bool IsOnline;
-        public byte Limit;
+        public  byte Limit;
         public Categories Category;
-        public Student[] Students;
+        public List<Student> Students = new List<Student>();
         public static byte count;
 
 
@@ -18,7 +19,8 @@ namespace Console_Application_Courses.Models
             count = 10;
         }
 
-        public Group(string No,byte limit,Categories category,Student[] student)
+        public Group(bool isOnline
+            ,Categories category)
         {
             switch (Category)
             {
@@ -36,7 +38,16 @@ namespace Console_Application_Courses.Models
             }
             count++;
             Category = category;
-            Students = student;
+            IsOnline = false;
+            if (!IsOnline)
+            {
+                Limit = 10;
+            }
+            else
+            {
+                Limit = 15;
+            }
+            Students = new List<Student>();
         }
     }
 }

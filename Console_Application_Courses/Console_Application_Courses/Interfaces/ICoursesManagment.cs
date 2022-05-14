@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Console_Application_Courses.Enum;
+using Console_Application_Courses.Models;
+using Group = Console_Application_Courses.Models.Group;
 
 namespace Console_Application_Courses.Interfaces
 {
     interface ICoursesManagment
     {
         public List<Group> Groups { get; }
+        string CreateGroup(Categories category,bool isOnline);
 
-        void CreatGroup(string no, byte limit, Categories category);
+        void ShowListOfGroups(string no);
 
-        void ShowListOFGroups();
+        void EditGroup(string oldGroup, string newGroup);
 
-        void MakeAmendOverGroup();
+        void ShowAllStudentsInGroup(string no);
 
-        void ShowAllStudentsByGroup();
+        void ShowAllOfStudents();
 
-        void ShowAllStudents();
-
-        void CreatStudent();
-
-        void DeleateStudent();
+        void CreateStudent(Student student, string groupNo);
+        
+        void DeleateStudent(Student student, string groupNo);
     }
 }

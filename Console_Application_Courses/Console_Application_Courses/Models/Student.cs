@@ -3,22 +3,18 @@ namespace Console_Application_Courses.Models
 {
     class Student
     {
-        public string Name;
-        public string Surname;
+        public string FullName;
         public string GroupNo;
         public bool Type;
+        public byte Id;
+        public static byte count;
 
-        public Student(string name, string surname, string groupno)
+        public Student(string fullname, string groupNo,byte id)
         {
-            Name = name;
-            Surname = surname;
-            GroupNo = groupno;
+            FullName = fullname;
+            GroupNo = groupNo;
             Type = false;
-        }
-
-        public string FullName()
-        {
-            return $"{Name}+{ Surname}";
+            Id = ++count;
         }
     }
 }
