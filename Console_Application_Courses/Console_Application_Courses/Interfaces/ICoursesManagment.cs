@@ -12,16 +12,16 @@ namespace Console_Application_Courses.Interfaces
         public List<Group> Groups { get; }
         string CreateGroup(Categories category,bool isOnline);
 
-        void ShowListOfGroups(string no);
+        void ShowListOfGroups();
 
         void EditGroup(string oldGroup, string newGroup);
 
-        void ShowAllStudentsInGroup(string no);
+        void ShowAllStudentsInGroup(string groupNo);
 
         void ShowAllOfStudents();
 
-        void CreateStudent(Student student, string groupNo);
+        string CreateStudent(Student student, string groupNo);
         
-        void DeleateStudent(Student student, string groupNo);
+        string DeleateStudent(byte id, string groupNo);
     }
 }

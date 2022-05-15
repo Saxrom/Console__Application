@@ -33,6 +33,18 @@ namespace Console_Application_Courses
                     case 3:
                         MenuManagment.EditGroup();
                         break;
+                    case 4:
+                        MenuManagment.ShowListOfStudentInGroup();
+                        break;
+                    case 5:
+                        MenuManagment.ShowAllOfStudents();
+                        break;
+                    case 6:
+                        MenuManagment.CreateStudent();
+                        break;
+                    case 7:
+                        MenuManagment.DeleateStudent();
+                        break;
                     default:
                         Console.WriteLine("Somthing went wrong");
                         break;

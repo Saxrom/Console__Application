@@ -1,5 +1,6 @@
 ﻿using System;
 using Console_Application_Courses.Enum;
+using Console_Application_Courses.Models;
 
 namespace Console_Application_Courses.Managment
 {
@@ -9,10 +10,6 @@ namespace Console_Application_Courses.Managment
 
         public static void CreateGroup()
         {
-            Console.WriteLine("Please enter Group :");
-            string no = Console.ReadLine();
-
-
             foreach (var item in System.Enum.GetValues(typeof(Categories)))
             {
                 Console.WriteLine($"{(int)item}. {item}");
@@ -20,6 +17,7 @@ namespace Console_Application_Courses.Managment
 
             object category;
             bool categoryResult = System.Enum.TryParse(typeof(Categories), Console.ReadLine(), out category);
+
 
             courseManagment.CreateGroup((Categories)category, true);
 
@@ -31,10 +29,7 @@ namespace Console_Application_Courses.Managment
 
         public static void ShowListOfGroups()
         {
-            Console.WriteLine("PLease enter Group ");
-            string no = Console.ReadLine();
-
-            courseManagment.ShowListOfGroups(no);
+            courseManagment.ShowListOfGroups();
         }
 
         public static void EditGroup()
@@ -50,12 +45,43 @@ namespace Console_Application_Courses.Managment
 
         public static void ShowListOfStudentInGroup()
         {
+            Console.WriteLine("Please enter group no");
+            string groupNo = Console.ReadLine();
 
+            courseManagment.ShowAllStudentsInGroup(groupNo);
         }
 
         public static void ShowAllOfStudents()
         {
             courseManagment.ShowAllOfStudents();
+        }
+
+        public static void CreateStudent()
+        {
+            Console.WriteLine("Please enter student's fullanme");
+            string fullName = Console.ReadLine();
+            bool type = true;
+
+            Console.WriteLine("Please enter the group you want to add to");
+            string groupNo = Console.ReadLine();
+
+            Student student = new Student(fullName, type);
+
+            courseManagment.CreateStudent(student, groupNo);
+        }
+
+        public static void DeleateStudent()
+        {
+            Console.WriteLine("Please enter student's fullanme");
+            string fullName = Console.ReadLine();
+            bool type = true;
+
+            Console.WriteLine("Please enter the group you want to add to");
+            string groupNo = Console.ReadLine();
+
+            Student student = new Student(fullName, type);
+
+            courseManagment.CreateStudent(student, groupNo);
         }
     }
 }

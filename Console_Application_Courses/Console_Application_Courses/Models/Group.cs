@@ -10,33 +10,32 @@ namespace Console_Application_Courses.Models
         public bool IsOnline;
         public  byte Limit;
         public Categories Category;
-        public List<Student> Students = new List<Student>();
-        public static byte count;
+        public List<Student> Students ;
+        public static byte Count;
 
 
-        public Group()
+        static Group()
         {
-            count = 10;
+            Count = 10;
         }
 
-        public Group(bool isOnline
-            ,Categories category)
+        public Group(bool isOnline,Categories category)
         {
-            switch (Category)
+            switch (category)
             {
                 case Categories.Programming:
-                    No = $"PR" + count;
+                    No = $"PR-" + Count;
                     break;
                 case Categories.Design:
-                    No = $"DN" + count;
+                    No = $"DN-" + Count;
                     break;
                 case Categories.System_administration:
-                    No = $"SA" + count;
+                    No = $"SA-" + Count;
                     break;
                 default:
                     break;
             }
-            count++;
+            Count++;
             Category = category;
             IsOnline = false;
             if (!IsOnline)
@@ -48,6 +47,11 @@ namespace Console_Application_Courses.Models
                 Limit = 15;
             }
             Students = new List<Student>();
+        }
+
+        public override string ToString()
+        {
+            return $"Group no:{No},Group type:{IsOnline},Student count:{Students.Count}";
         }
     }
 }
