@@ -96,7 +96,7 @@ namespace Console_Application_Courses.Managment
             bool typeResult = false;
             do
             {
-                Console.Write("Is the student guaranteed or not?(y/n) :");
+                Console.Write("\nIs the student guaranteed or not?(y/n) :");
                 type = Console.ReadLine().ToLower();
 
             } while (type != "y" && type != "n");
@@ -117,7 +117,7 @@ namespace Console_Application_Courses.Managment
             byte Id;
             bool resultId = byte.TryParse(Console.ReadLine(), out Id);
 
-            Console.Write("Please enter the group you want to deleate to:");
+            Console.Write("\nPlease enter the group you want to deleate to:");
             string groupNo = Console.ReadLine().ToUpper();
 
             if (resultId&&groupNo!=null)
