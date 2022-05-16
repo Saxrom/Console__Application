@@ -41,7 +41,7 @@ namespace Console_Application_Courses.Managment
             {
                 Group group = FindGroup(groupNo);
 
-                if (group == null)
+                if (group== null)
                 {
                     Console.WriteLine($"Please enter valid group");
                 }
@@ -83,7 +83,6 @@ namespace Console_Application_Courses.Managment
                         Console.WriteLine($"{student.FullName} was remowed from the group");
                         break;
                     }
-                    return $"there is no such student";
                 }
 
                 else
@@ -91,7 +90,6 @@ namespace Console_Application_Courses.Managment
                     Console.WriteLine($"Please check if you have led the group and id correctly");
                     ShowAllOfStudents();
                 }
-                return null;
             }
             else
             {
@@ -149,9 +147,9 @@ namespace Console_Application_Courses.Managment
 
         public void ShowAllOfStudents()
         {
-            if (Groups.Count>0)
+            if (Groups.Count > 0)
             {
-                if (Student.count==0)
+                if (Student.count == 0)
                 {
                     Console.WriteLine("Students didn't creat");
                 }
@@ -171,7 +169,6 @@ namespace Console_Application_Courses.Managment
             {
                 Console.WriteLine("Group didn't creat");
             }
-
 
         }
 

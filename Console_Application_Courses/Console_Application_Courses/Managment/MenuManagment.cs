@@ -48,20 +48,30 @@ namespace Console_Application_Courses.Managment
 
         public static void ShowListOfGroups()
         {
-            courseManagment.ShowListOfGroups();
+            if (courseManagment.Groups.Count>0)
+            {
+                courseManagment.ShowAllOfStudents();
+            }
         }
 
         public static void EditGroup()
         {
-            ShowListOfGroups();
+            if (courseManagment.Groups.Count>0)
+            {
+                ShowListOfGroups();
 
-            Console.Write("\nPlease enter group :");
-            string oldGroup = Console.ReadLine().ToUpper();
+                Console.Write("\nPlease enter group :");
+                string oldGroup = Console.ReadLine().ToUpper();
 
-            Console.Write("\nPlease enter new group :");
-            string newGroup = Console.ReadLine().ToUpper();
+                Console.Write("\nPlease enter new group :");
+                string newGroup = Console.ReadLine().ToUpper();
 
-            courseManagment.EditGroup(oldGroup, newGroup);
+                courseManagment.EditGroup(oldGroup, newGroup);
+            }
+            else
+            {
+                Console.WriteLine("Group didn't creat");
+            }
         }
 
         public static void ShowListOfStudentInGroup()
@@ -81,53 +91,68 @@ namespace Console_Application_Courses.Managment
 
         public static void CreateStudent()
         {
-            Console.Write("Please enter student's fullanme:");
-            string fullName = Console.ReadLine();
-
-            ShowListOfGroups();
-
-            Console.Write("\nPlease enter the group you want to add to:");
-            string groupNo = Console.ReadLine().ToUpper();
-
-            Console.Clear();
-            ShowListOfGroups();
-
-            string type;
-            bool typeResult = false;
-            do
+            if (courseManagment.Groups.Count>0)
             {
-                Console.Write("\nIs the student guaranteed or not?(y/n) :");
-                type = Console.ReadLine().ToLower();
+                Console.Write("Please enter student's fullanme:");
+                string fullName = Console.ReadLine();
 
-            } while (type != "y" && type != "n");
+                ShowListOfGroups();
 
-            if (type == "y") typeResult = true;
-            if (type == "n") typeResult = false;
+                Console.Write("\nPlease enter the group you want to add to:");
+                string groupNo = Console.ReadLine().ToUpper();
 
-            Student student = new Student(fullName, typeResult);
+                Console.Clear();
+                ShowListOfGroups();
 
-            courseManagment.CreateStudent(student, groupNo);
+                string type;
+                bool typeResult = false;
+                do
+                {
+                    Console.Write("\nIs the student guaranteed or not?(y/n) :");
+                    type = Console.ReadLine().ToLower();
+
+                } while (type != "y" && type != "n");
+
+                if (type == "y") typeResult = true;
+                if (type == "n") typeResult = false;
+
+                Student student = new Student(fullName, typeResult);
+
+                courseManagment.CreateStudent(student, groupNo);
+            }
+            else
+            {
+                Console.WriteLine("Groups didn't creat");
+            }
         }
 
         public static void DeleateStudent()
         {
-            ShowAllOfStudents();
-
-            Console.Write("\nPlease enter student's Id:");
-            byte Id;
-            bool resultId = byte.TryParse(Console.ReadLine(), out Id);
-
-            Console.Write("\nPlease enter the group you want to deleate to:");
-            string groupNo = Console.ReadLine().ToUpper();
-
-            if (resultId&&groupNo!=null)
+            if (courseManagment.Groups.Count>0)
             {
-                courseManagment.DeleateStudent(Id, groupNo);
+                ShowAllOfStudents();
+
+                Console.Write("\nPlease enter student's Id:");
+                byte Id;
+                bool resultId = byte.TryParse(Console.ReadLine(), out Id);
+
+                Console.Write("\nPlease enter the group you want to deleate to:");
+                string groupNo = Console.ReadLine().ToUpper();
+
+                if (resultId && groupNo != null)
+                {
+                    courseManagment.DeleateStudent(Id, groupNo);
+                }
+                else
+                {
+                    Console.WriteLine("please enter the correct Id and GroupNo");
+                }
             }
             else
             {
-                Console.WriteLine("please enter the correct Id and GroupNo");
+                Console.WriteLine("Group didn't creat");
             }
+
         }
     }
 }
