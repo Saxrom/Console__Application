@@ -13,9 +13,9 @@ namespace Console_Application_Courses.Managment
 
         public string CreateGroup(Categories category,bool isOnline)
         {
-            Group group = new Group(true, category);
+            Group group = new Group(isOnline, category);
 
-            if (Groups.Count==0)
+            if (Groups.Count>=0)
             {
                 _groups.Add(group);
                 Console.WriteLine($"{group.No} successfully created");
@@ -31,7 +31,7 @@ namespace Console_Application_Courses.Managment
                     }
                 }
             }
-            return$"Group can not create";
+            return $"Group can not create";
 
         }
 
@@ -41,9 +41,10 @@ namespace Console_Application_Courses.Managment
             {
                 Group group = FindGroup(groupNo);
 
-                if (groupNo == null)
+                if (group == null)
                 {
-                    return $"Please enter valid group";
+                    Console.WriteLine($"Please enter valid group");
+                    ShowListOfGroups();
                 }
 
                 else
@@ -53,7 +54,8 @@ namespace Console_Application_Courses.Managment
                         if (existedGroup.Students.Count < group.Limit)
                         {
                             group.Students.Add(student);
-                            Console.WriteLine($"{student} successfully created");
+                            Console.WriteLine($"{student.FullName}=> successfully created");
+                            ShowAllOfStudents();
                         }
                         else
                         {
@@ -62,27 +64,40 @@ namespace Console_Application_Courses.Managment
                     }
                 }
             }
+            else
+            {
+                Console.WriteLine("This group can not create");
+            }
             return $"This is there is already such a student";
         }
 
         public string DeleateStudent(byte id,string groupNo)
         {
-            Group group = FindGroup(groupNo);
-
-            if (group != null || id != 0)
+            if (Groups.Count>0)
             {
-                foreach (Student student in group.Students)
-                {
-                    group.Students.Remove(student);
-                    Console.WriteLine($"{student.FullName} was remowed from the group");
-                }
-                return $"there is no such student";
-            }
+                Group group = FindGroup(groupNo);
 
+                if (group != null || id != 0)
+                {
+                    foreach (Student student in group.Students)
+                    {
+                        group.Students.Remove(student);
+                        Console.WriteLine($"{student.FullName} was remowed from the group");
+                        break;
+                    }
+                    return $"there is no such student";
+                }
+
+                else
+                {
+                    Console.WriteLine($"Please check if you have led the group and id correctly");
+                    ShowAllOfStudents();
+                }
+                return null;
+            }
             else
             {
-                Console.WriteLine($"Please check if you have led the group and id correctly");
-                ShowListOfGroups();
+                Console.WriteLine("Group didn't creat"); 
             }
             return null;
         }
@@ -92,6 +107,10 @@ namespace Console_Application_Courses.Managment
             foreach (Group existedGroup in Groups)
             {
                 if (no.ToLower().Trim() == existedGroup.No.ToLower().Trim()) return existedGroup;
+                else
+                {
+                    Console.WriteLine("Please enter valid group");
+                }
                 
             }
             return null;
@@ -100,23 +119,33 @@ namespace Console_Application_Courses.Managment
 
         public void EditGroup(string oldGroup,string newGroup)
         {
-            if (FindGroup(newGroup)==null)
+            if (Groups.Count>0)
             {
-                Group group = FindGroup(oldGroup);
-
-                if (group!=null)
+                if (FindGroup(newGroup) == null)
                 {
-                    group.No = oldGroup.ToUpper().Trim();
-                }
+                    Group group = FindGroup(oldGroup);
 
+                    if (group != null)
+                    {
+                        group.No = newGroup.ToUpper().Trim();
+                        Console.WriteLine($"\n{ group.No} was edited");
+                    }
+
+                    else
+                    {
+                        Console.WriteLine($"There is no group with the name you are looking for {oldGroup}");
+                    }
+                }
                 else
                 {
-                    Console.WriteLine("There is no group with the name you are looking for"); 
+                    Console.WriteLine("Such a group already exists");
+                    Console.Clear();
+                    ShowListOfGroups();
                 }
             }
             else
             {
-                Console.WriteLine("Such a group already exists");
+                Console.WriteLine("The group has not been created");
             }
         }
 
@@ -126,20 +155,23 @@ namespace Console_Application_Courses.Managment
             {
                 if (Student.count==0)
                 {
-                    Console.WriteLine("Student didn't created");
+                    Console.WriteLine("Students didn't creat");
                 }
 
-                foreach (Group group in Groups)
+                else
                 {
-                    foreach (Student stu in group.Students)
+                    foreach (Group group in Groups)
                     {
-                        Console.WriteLine($"{stu} Group:{group.No}");
+                        foreach (Student stu in group.Students)
+                        {
+                            Console.WriteLine($"{stu} Group:{group.No}");
+                        }
                     }
                 }
             }
             else
             {
-                Console.WriteLine("Group didn't created");
+                Console.WriteLine("Group didn't creat");
             }
 
 
@@ -149,16 +181,23 @@ namespace Console_Application_Courses.Managment
         {
             Group group = FindGroup(groupNo);
 
-            if (group!=null)
+            if (group.Students.Count>0)
             {
-                foreach (Student student in group.Students)
+                if (group != null)
                 {
-                    Console.WriteLine(student);
+                    foreach (Student student in group.Students)
+                    {
+                        Console.WriteLine(student);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter valid group no");
                 }
             }
             else
             {
-                Console.WriteLine("Please enter valid group no");
+                Console.WriteLine("Students didn't creat");
             }
         }
 

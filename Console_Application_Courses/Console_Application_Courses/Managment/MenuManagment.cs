@@ -10,20 +10,39 @@ namespace Console_Application_Courses.Managment
 
         public static void CreateGroup()
         {
+
+            string isOnline;
+            bool resultIsOnline = false;
+            do
+            {
+                Console.Write("Do you want to create an online group?(Y/N) :");
+                isOnline = Console.ReadLine().ToLower();
+
+
+            } while (isOnline != "y" && isOnline != "n");
+
+            if (isOnline == "y") resultIsOnline = true;
+            if (isOnline == "n") resultIsOnline = false;
+            Console.Clear();
+
             foreach (var item in System.Enum.GetValues(typeof(Categories)))
             {
                 Console.WriteLine($"{(int)item}. {item}");
             }
+            Console.Write("\nPlease choose course type:");
 
             object category;
             bool categoryResult = System.Enum.TryParse(typeof(Categories), Console.ReadLine(), out category);
-
-
-            courseManagment.CreateGroup((Categories)category, true);
+            
 
             if (categoryResult)
             {
-                Console.WriteLine(category);
+                courseManagment.CreateGroup((Categories)category,resultIsOnline);
+            }
+
+            else
+            {
+                Console.WriteLine("Something went wrong");
             }
         }
 
@@ -34,19 +53,26 @@ namespace Console_Application_Courses.Managment
 
         public static void EditGroup()
         {
-            Console.WriteLine("Please enter group :");
-            string oldGroup = Console.ReadLine();
+            ShowListOfGroups();
 
-            Console.WriteLine("Please enter new group :");
-            string newGroup = Console.ReadLine();
+            Console.Write("\nPlease enter group :");
+            string oldGroup = Console.ReadLine().ToUpper();
+
+            Console.Write("Please enter new group :");
+            string newGroup = Console.ReadLine().ToUpper();
 
             courseManagment.EditGroup(oldGroup, newGroup);
         }
 
         public static void ShowListOfStudentInGroup()
         {
-            Console.WriteLine("Please enter group no");
-            string groupNo = Console.ReadLine();
+            ShowListOfGroups();
+            string groupNo;
+            do
+            {
+                Console.Write("Please enter group no:");
+                groupNo = Console.ReadLine().ToUpper();
+            } while (string.IsNullOrEmpty(groupNo) && string.IsNullOrWhiteSpace(groupNo));
 
             courseManagment.ShowAllStudentsInGroup(groupNo);
         }
@@ -58,30 +84,51 @@ namespace Console_Application_Courses.Managment
 
         public static void CreateStudent()
         {
-            Console.WriteLine("Please enter student's fullanme");
+            Console.Write("Please enter student's fullanme:");
             string fullName = Console.ReadLine();
-            bool type = true;
 
-            Console.WriteLine("Please enter the group you want to add to");
-            string groupNo = Console.ReadLine();
+            Console.Clear();
+            ShowListOfGroups();
 
-            Student student = new Student(fullName, type);
+            Console.Write("\nPlease enter the group you want to add to:");
+            string groupNo = Console.ReadLine().ToUpper();
+
+            string type;
+            bool typeResult = false;
+            do
+            {
+                Console.Write("Is the student guaranteed or not?y/n");
+                type = Console.ReadLine().ToLower();
+
+            } while (type != "y" && type != "n");
+
+            if (type == "y") typeResult = true;
+            if (type == "n") typeResult = false;
+
+            Student student = new Student(fullName, typeResult);
 
             courseManagment.CreateStudent(student, groupNo);
         }
 
         public static void DeleateStudent()
         {
-            Console.WriteLine("Please enter student's fullanme");
-            string fullName = Console.ReadLine();
-            bool type = true;
+            ShowAllOfStudents();
 
-            Console.WriteLine("Please enter the group you want to add to");
-            string groupNo = Console.ReadLine();
+            Console.Write("\nPlease enter student's Id:");
+            byte Id;
+            bool resultId = byte.TryParse(Console.ReadLine(), out Id);
 
-            Student student = new Student(fullName, type);
+            Console.Write("Please enter the group you want to deleate to:");
+            string groupNo = Console.ReadLine().ToUpper();
 
-            courseManagment.CreateStudent(student, groupNo);
+            if (resultId&&groupNo!=null)
+            {
+                courseManagment.DeleateStudent(Id, groupNo);
+            }
+            else
+            {
+                Console.WriteLine("please enter the correct Id and GroupNo");
+            }
         }
     }
 }

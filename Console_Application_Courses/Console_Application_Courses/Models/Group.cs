@@ -37,21 +37,21 @@ namespace Console_Application_Courses.Models
             }
             Count++;
             Category = category;
-            IsOnline = false;
-            if (!IsOnline)
+            IsOnline = isOnline;
+            if (IsOnline)
             {
-                Limit = 10;
+                Limit = 15;
             }
             else
             {
-                Limit = 15;
+                Limit = 10;
             }
             Students = new List<Student>();
         }
 
         public override string ToString()
         {
-            return $"Group no:{No},Group type:{IsOnline},Student count:{Students.Count}";
+            return $"Group no:{No},Group type:{(IsOnline? "Online": "Ofline")},Student count:{Students.Count},Group limit:{Limit}";
         }
     }
 }

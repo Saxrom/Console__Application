@@ -22,7 +22,7 @@ namespace Console_Application_Courses.Models
 
         public override string ToString()
         {
-            return $"Student's fullname:{FullName},Id:{Id},{(Type? "Zamanetli" :"Zamanetsiz")}";
+            return $"Student's fullname:{FullName},Id:{Id},Type:{(Type? "Zamanetli" :"Zamanetsiz")}";
         }
     }
 }

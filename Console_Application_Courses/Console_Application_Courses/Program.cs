@@ -12,6 +12,7 @@ namespace Console_Application_Courses
             byte selection;
             do
             {
+                Console.WriteLine("\n");
                 Console.WriteLine("1.Create new group");
                 Console.WriteLine("2.Show list of groups");
                 Console.WriteLine("3.Edit the group");
@@ -19,6 +20,9 @@ namespace Console_Application_Courses
                 Console.WriteLine("5.Show list of all students");
                 Console.WriteLine("6.Create a student");
                 Console.WriteLine("7.Deleate a student");
+                Console.WriteLine("0.Exit the programm");
+                Console.Write("\nPlease enter:");
+
                 bool result = byte.TryParse(Console.ReadLine(), out selection);
                 Console.Clear();
 
@@ -44,6 +48,9 @@ namespace Console_Application_Courses
                         break;
                     case 7:
                         MenuManagment.DeleateStudent();
+                        break;
+                    case 0:
+                        Console.WriteLine("Thanks for using our Application!");
                         break;
                     default:
                         Console.WriteLine("Somthing went wrong");
