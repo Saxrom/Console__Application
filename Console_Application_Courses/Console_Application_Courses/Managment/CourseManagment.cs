@@ -181,24 +181,18 @@ namespace Console_Application_Courses.Managment
         {
             Group group = FindGroup(groupNo);
 
-            if (group.Students.Count>0)
+            if (group != null)
             {
-                if (group != null)
+                foreach (Student student in group.Students)
                 {
-                    foreach (Student student in group.Students)
-                    {
-                        Console.WriteLine(student);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please enter valid group no");
+                    Console.WriteLine(student);
                 }
             }
             else
             {
-                Console.WriteLine("Students didn't creat");
+                Console.WriteLine("No groups found");
             }
+
         }
 
         public void ShowListOfGroups()
@@ -209,10 +203,6 @@ namespace Console_Application_Courses.Managment
                 {
                     Console.WriteLine(group);
                 }
-            }
-            else
-            {
-                Console.WriteLine("There are no groups");
             }
         }
     }

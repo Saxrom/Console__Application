@@ -67,12 +67,9 @@ namespace Console_Application_Courses.Managment
         public static void ShowListOfStudentInGroup()
         {
             ShowListOfGroups();
-            string groupNo;
-            do
-            {
-                Console.Write("Please enter group no:");
-                groupNo = Console.ReadLine().ToUpper();
-            } while (string.IsNullOrEmpty(groupNo) && string.IsNullOrWhiteSpace(groupNo));
+
+            Console.Write("Please enter group no:");
+            string groupNo = Console.ReadLine().ToUpper();
 
             courseManagment.ShowAllStudentsInGroup(groupNo);
         }
@@ -87,11 +84,12 @@ namespace Console_Application_Courses.Managment
             Console.Write("Please enter student's fullanme:");
             string fullName = Console.ReadLine();
 
-            Console.Clear();
-            ShowListOfGroups();
 
             Console.Write("\nPlease enter the group you want to add to:");
             string groupNo = Console.ReadLine().ToUpper();
+
+            Console.Clear();
+            ShowListOfGroups();
 
             string type;
             bool typeResult = false;
