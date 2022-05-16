@@ -44,7 +44,6 @@ namespace Console_Application_Courses.Managment
                 if (group == null)
                 {
                     Console.WriteLine($"Please enter valid group");
-                    ShowListOfGroups();
                 }
 
                 else
@@ -55,7 +54,6 @@ namespace Console_Application_Courses.Managment
                         {
                             group.Students.Add(student);
                             Console.WriteLine($"{student.FullName}=> successfully created");
-                            ShowAllOfStudents();
                         }
                         else
                         {
@@ -128,7 +126,7 @@ namespace Console_Application_Courses.Managment
                     if (group != null)
                     {
                         group.No = newGroup.ToUpper().Trim();
-                        Console.WriteLine($"\n{ group.No} was edited");
+                        Console.WriteLine($"\n{ oldGroup} was edited");
                     }
 
                     else
@@ -183,9 +181,16 @@ namespace Console_Application_Courses.Managment
 
             if (group != null)
             {
-                foreach (Student student in group.Students)
+                if (group.Students.Count>0)
                 {
-                    Console.WriteLine(student);
+                    foreach (Student student in group.Students)
+                    {
+                        Console.WriteLine(student);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No students found");
                 }
             }
             else
@@ -203,6 +208,10 @@ namespace Console_Application_Courses.Managment
                 {
                     Console.WriteLine(group);
                 }
+            }
+            else
+            {
+                Console.WriteLine("There are no groups");
             }
         }
     }

@@ -58,7 +58,7 @@ namespace Console_Application_Courses.Managment
             Console.Write("\nPlease enter group :");
             string oldGroup = Console.ReadLine().ToUpper();
 
-            Console.Write("Please enter new group :");
+            Console.Write("\nPlease enter new group :");
             string newGroup = Console.ReadLine().ToUpper();
 
             courseManagment.EditGroup(oldGroup, newGroup);
@@ -68,7 +68,7 @@ namespace Console_Application_Courses.Managment
         {
             ShowListOfGroups();
 
-            Console.Write("Please enter group no:");
+            Console.Write("\nPlease enter group no:");
             string groupNo = Console.ReadLine().ToUpper();
 
             courseManagment.ShowAllStudentsInGroup(groupNo);
@@ -84,6 +84,7 @@ namespace Console_Application_Courses.Managment
             Console.Write("Please enter student's fullanme:");
             string fullName = Console.ReadLine();
 
+            ShowListOfGroups();
 
             Console.Write("\nPlease enter the group you want to add to:");
             string groupNo = Console.ReadLine().ToUpper();
@@ -95,7 +96,7 @@ namespace Console_Application_Courses.Managment
             bool typeResult = false;
             do
             {
-                Console.Write("Is the student guaranteed or not?y/n");
+                Console.Write("Is the student guaranteed or not?(y/n) :");
                 type = Console.ReadLine().ToLower();
 
             } while (type != "y" && type != "n");
